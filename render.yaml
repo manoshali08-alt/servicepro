@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: servicepro-followups
+    runtime: docker
+    plan: starter            # persistent disks need a paid plan
+    healthCheckPath: /healthz
+    disk: {name: data, mountPath: /data, sizeGB: 1}
+    envVars:
+      - {key: APP_ENV, value: production}
+      - {key: DATABASE_PATH, value: /data/servicepro.db}
+      - {key: SECRET_KEY, generateValue: true}
+      - {key: ADMIN_EMAIL, sync: false}
+      - {key: ADMIN_PASSWORD, sync: false}
